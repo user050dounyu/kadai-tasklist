@@ -7,11 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(
+            name = "getAllMessages",//↓のSELECT文の名前
+                    query = "SELECT m FROM Task AS m ORDER BY m.id DESC"//SELECT ｍはSELECT *と同じ
+            )
+})
+
 @Table(name = "tasks")
-public class MessageDTO {
+public class Task{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //主キー自動生成、（生成をDBに委任）
